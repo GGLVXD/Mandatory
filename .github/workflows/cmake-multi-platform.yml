@@ -24,11 +24,8 @@ jobs:
         mv main artifacts/linux/main
 
     - name: Test on Linux
-      id: test-linux
       run: |
         # Run tests here if applicable
-        # Set output variable based on test result
-        echo "::set-output name=tests-passed::true" # Change this based on your test result
 
     - name: Upload Linux artifact
       uses: actions/upload-artifact@v2
@@ -53,11 +50,8 @@ jobs:
         mv main.exe artifacts/windows/main.exe
 
     - name: Test on Windows
-      id: test-windows
       run: |
         # Run tests here if applicable
-        # Set output variable based on test result
-        echo "::set-output name=tests-passed::true" # Change this based on your test result
 
     - name: Upload Windows artifact
       uses: actions/upload-artifact@v2
@@ -82,45 +76,11 @@ jobs:
         mv main artifacts/macos/main
 
     - name: Test on macOS
-      id: test-macos
       run: |
         # Run tests here if applicable
-        # Set output variable based on test result
-        echo "::set-output name=tests-passed::true" # Change this based on your test result
 
     - name: Upload macOS artifact
       uses: actions/upload-artifact@v2
       with:
         name: macos-executables
         path: artifacts/macos
-
-  generate-readme:
-    needs: [build-linux, build-windows, build-macos]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Generate README
-      run: |
-        echo "# Build and Test Results" > README.md
-        echo "" >> README.md
-        echo "## Linux" >> README.md
-        echo "- Tests Passed: \`${{ steps.build-linux.outputs.tests-passed }}\`" >> README.md
-        echo "[Download Linux Executables](https://github.com/${{ github.repository }}/actions/artifacts/$(< artifacts/linux/.artifact_id))" >> README.md
-        echo "" >> README.md
-        echo "## Windows" >> README.md
-        echo "- Tests Passed: \`${{ steps.build-windows.outputs.tests-passed }}\`" >> README.md
-        echo "[Download Windows Executables](https://github.com/${{ github.repository }}/actions/artifacts/$(< artifacts/windows/.artifact_id))" >> README.md
-        echo "" >> README.md
-        echo "## macOS" >> README.md
-        echo "- Tests Passed: \`${{ steps.build-macos.outputs.tests-passed }}\`" >> README.md
-        echo "[Download macOS Executables](https://github.com/${{ github.repository }}/actions/artifacts/$(< artifacts/macos/.artifact_id))" >> README.md
-
-    - name: Commit and push changes
-      run: |
-        git config --global user.name "${{ github.actor }}"
-        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-        git add README.md
-        git commit -m "Updated README with build and test results"
-        git push
