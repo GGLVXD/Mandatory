@@ -20,10 +20,18 @@ jobs:
     - name: Compile on Linux
       run: |
         gcc *.c -o main
+        mkdir -p artifacts/linux
+        mv main artifacts/linux/main
 
     - name: Test on Linux
       run: |
         # Run tests here if applicable
+
+    - name: Upload Linux artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: linux-executables
+        path: artifacts/linux
 
   build-windows:
     runs-on: windows-latest
@@ -38,10 +46,18 @@ jobs:
     - name: Compile on Windows
       run: |
         gcc *.c -o main.exe
+        mkdir -p artifacts/windows
+        mv main.exe artifacts/windows/main.exe
 
     - name: Test on Windows
       run: |
         # Run tests here if applicable
+
+    - name: Upload Windows artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: windows-executables
+        path: artifacts/windows
 
   build-macos:
     runs-on: macos-latest
@@ -56,7 +72,15 @@ jobs:
     - name: Compile on macOS
       run: |
         gcc *.c -o main
+        mkdir -p artifacts/macos
+        mv main artifacts/macos/main
 
     - name: Test on macOS
       run: |
         # Run tests here if applicable
+
+    - name: Upload macOS artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: macos-executables
+        path: artifacts/macos
