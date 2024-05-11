@@ -19,13 +19,13 @@ jobs:
 
     - name: Compile
       run: |
-        if [ "${{ runner.os }}" = "Windows" ]; then
+        if ($env:RUNNER_OS -eq "Windows") {
           # Use gcc for Windows
           gcc *.c -o main.exe
-        else
+        } else {
           # Use gcc for Linux/macOS
           gcc *.c -o main
-        fi
+        }
 
     - name: Test
       run: |
