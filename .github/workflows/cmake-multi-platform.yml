@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        cpu-type: [x86, x64, amd]
+        cpu-type: [x86, x64, amd, arm]
 
     steps:
     - uses: actions/checkout@v4
@@ -38,7 +38,7 @@ jobs:
 
     strategy:
       matrix:
-        cpu-type: [x86, x64, amd]
+        cpu-type: [x86, x64, amd, arm]
 
     steps:
     - uses: actions/checkout@v4
@@ -64,7 +64,7 @@ jobs:
 
     strategy:
       matrix:
-        cpu-type: [x86, x64, amd]
+        cpu-type: [x86, x64, amd, arm]
 
     steps:
     - uses: actions/checkout@v4
