@@ -7,26 +7,30 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+  build-linux:
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Compile
+    - name: Compile on Linux
       run: |
-        if ($env:RUNNER_OS -eq "Windows") {
-          # Use gcc for Windows
-          gcc *.c -o main.exe
-        } else {
-          # Use gcc for Linux/macOS
-          gcc *.c -o main
-        }
+        gcc *.c -o main
 
-    - name: Test
+    - name: Test on Linux
+      run: |
+        # Run tests here if applicable
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Compile on Windows
+      run: |
+        gcc *.c -o main.exe
+
+    - name: Test on Windows
       run: |
         # Run tests here if applicable
