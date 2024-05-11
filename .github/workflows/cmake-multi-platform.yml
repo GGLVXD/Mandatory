@@ -10,6 +10,10 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        cpu-type: [x86, x64, amd]
+
     steps:
     - uses: actions/checkout@v4
 
@@ -24,6 +28,10 @@ jobs:
   build-windows:
     runs-on: windows-latest
 
+    strategy:
+      matrix:
+        cpu-type: [x86, x64, amd]
+
     steps:
     - uses: actions/checkout@v4
 
@@ -34,3 +42,4 @@ jobs:
     - name: Test on Windows
       run: |
         # Run tests here if applicable
+
