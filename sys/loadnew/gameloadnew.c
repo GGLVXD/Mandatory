@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "data/gamedata.c"
+#include "../data/gamedata.c"
 
 
 //loads a new save file aka gamedata.txt
