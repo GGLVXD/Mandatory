@@ -43,3 +43,20 @@ jobs:
       run: |
         # Run tests here if applicable
 
+  build-macos:
+    runs-on: macos-latest
+
+    strategy:
+      matrix:
+        cpu-type: [x86, x64, amd]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Compile on macOS
+      run: |
+        gcc *.c -o main
+
+    - name: Test on macOS
+      run: |
+        # Run tests here if applicable
