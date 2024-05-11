@@ -1,0 +1,33 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Compile
+      run: |
+        if [ "${{ runner.os }}" = "Windows" ]; then
+          # Use gcc for Windows
+          gcc *.c -o main.exe
+        else
+          # Use gcc for Linux/macOS
+          gcc *.c -o main
+        fi
+
+    - name: Test
+      run: |
+        # Run tests here if applicable
+
